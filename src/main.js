@@ -3,12 +3,16 @@
 import  './mystyle.css'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
 import App from './App'
 import Test from './test'
 import Home from './Home'
 import SearchLocation from './SearchLocation'
 
 Vue.use(VueRouter);
+Vue.use(MintUI);
 
 //配置路由
 const routes = [

@@ -23,7 +23,7 @@ li{
 .c6{
   color: #666;
 }
-.cWhite{
+.cFF{
   color: white;
 }
 
@@ -72,10 +72,16 @@ li{
 }
 
 /*flex布局*/
-.flexStart{
+.mLcC{
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+ }
+.mSBcC{
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 .mcCenter{

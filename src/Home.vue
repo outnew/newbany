@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <section class="layoutCol hidden bgcFF">
-      <header class="head flexStart cWhite">
+      <header class="head mLcC cFF">
         <span class="head_logo">ele.me</span>
-        <a href="" class="head_login cWhite">登录</a>
+        <a href="" class="head_login cFF">登录</a>
         <span>|</span>
-        <a href="" class="head_register cWhite">注册</a>
+        <a href="" class="head_register cFF">注册</a>
       </header>
       <div class="guessCity bb_def mcCenter c6 fsMin">
         <span class="tipsLocation">当前定位城市：</span>
@@ -14,8 +14,7 @@
       <div class="location bb_new mcCenter">
         <!--<span class="currentCity c31">{{guessCity.name}}</span>-->
         <!--<router-link :to="'/searchLocation/'+guessCity.name">{{guessCity.name}}</router-link>-->
-        <router-link  :to="{ name: 'searchlocation', params: { city: guessCity.name }}">{{guessCity.name}}</router-link>
-
+        <router-link  :to="{ name: 'searchlocation', params: { city: guessCity.name,id:guessCity.id }}" class="currentCity c31">{{guessCity.name}}</router-link>
         <span class="icon_arrow">&gt;</span>
       </div>
     </section>
@@ -60,32 +59,32 @@
     },
     methods:{
       getCity(type){
-        let requestConfig = {
-          credentials: 'include',
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          mode: "cors",
-          cache: "force-cache"
-        }
-
-        var req=new Request("http://elm.cangdu.org:8001/v1/cities?type="+type,requestConfig);
-        fetch(req).then(response=> {
-          return response.json();
-        }).then(resp=> {
-          if(type=="guess"){
-            this.guessCity = resp;
-          }else if(type=="hot"){
-            this.hotCity = resp;
-          }else{
-            this.group = resp;
-            // this.groupObjtoArray(resp);
-          }
-        })
+      let requestConfig = {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        mode: "cors",
+        cache: "force-cache"
       }
-    },
+
+      var req=new Request("http://elm.cangdu.org:8001/v1/cities?type="+type,requestConfig);
+      fetch(req).then(response=> {
+        return response.json();
+      }).then(resp=> {
+        if(type=="guess"){
+          this.guessCity = resp;
+        }else if(type=="hot"){
+          this.hotCity = resp;
+        }else{
+          this.group = resp;
+          // this.groupObjtoArray(resp);
+        }
+      })
+    }
+  },
     computed:{
       // 对数组进行排序  依次A-Z
       sortGroup(){
