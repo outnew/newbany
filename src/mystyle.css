@@ -1,13 +1,15 @@
 /*公用*/
-*{
+*,a,li,input,button{
   padding:0;
   margin:0;
-}
-a{
   text-decoration: none;
-}
-li{
   list-style: none;
+  outline: none;/*去掉chrome浏览器自带的点击input框出现边框情况*/
+  background:none;
+  border:0px;
+  -webkit-appearance: none; /*去掉按钮样式*/
+  /*-webkit-appearance: button;*/
+  /*使元素标签看起来像个按钮样式，意思定义了按钮样式*/
 }
 
 /*字体*/
@@ -17,11 +19,17 @@ li{
 .fsMin{
   font-size: 12px;
 }
+.fsPri{
+  font-size: 16px;
+}
 .c31{
   color: #3190e8;
 }
 .c6{
   color: #666;
+}
+.c9{
+  color: #999;
 }
 .cFF{
   color: white;
@@ -54,6 +62,11 @@ li{
   margin-top: 10px;
 }
 
+/*圆角*/
+.radius{
+  border-radius: 4px;
+}
+
 /*文本溢出*/
 .ellipsis {
   overflow: hidden;
@@ -84,11 +97,18 @@ li{
   justify-content: space-between;
   align-items: center;
 }
+.mSAcC{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
 .mcCenter{
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .layoutCol{
   display: flex;
   flex-direction: column;
@@ -103,7 +123,10 @@ li{
   display: flex;
   flex-wrap: wrap;
 }
-
+.nowrap{
+  display: flex;
+  flex-wrap: nowrap;
+}
 
 /*具体页面*/
 #app{

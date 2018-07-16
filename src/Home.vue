@@ -19,7 +19,8 @@
       </div>
     </section>
 
-    <section class="hotCity layoutCol bgcFF c6 ">
+
+    <section class="hotCity layoutCol bgcFF c6">
       <h5 class="titleHC bt_def bb_def ti box" style="align-items: center">热门城市</h5>
       <ul class="mcCenter wrap">
         <li v-for="item in hotCity" :key="item.id" class="mcCenter dataHC bb_def br_def c31">{{item.name}}</li>
@@ -28,16 +29,16 @@
 
     <!--v-for 支持遍历对象  v-for="(val, key, index) in group" value:元素，key:属性，index:下标  -->
     <!--支持以computed下的数据源-->
-    <section v-for="(val, key, index) in sortGroup" :key="key" class="sortCity c31 bgcFF" style="flex-direction: column;line-height: 2rem;">
+    <section v-for="(val, key, index) in sortGroup" :key="key" class="sortCity c31 bgcFF layoutCol">
       <h5 class="titleSG bt_def br_def bb_def ti" style="flex: 1;">{{key}}</h5>
-      <ul class="box" style="flex-wrap: wrap;width: 100%;font-size: 12px;">
-        <li class="dataSG bb_def br_def ellipsis mcCenter" v-for="item in val" >{{item.name}}</li>
+      <ul class="box" style="flex-wrap: wrap;width: 100%;font-size: 14px;line-height: 3rem">
+        <li class="dataSG bb_def br_def ellipsis" style="text-align: center"  v-for="item in val">{{item.name}}</li>
       </ul>
     </section>
 
 
   </div>
-</template>
+</template>height: 1.75rem;
 
 <script>
   export default {
@@ -111,8 +112,8 @@
   .head_register,.tips,.icon_arrow{
     margin-right:10px;
   }
-  .head,.guessCity,.location,.titleHC,.dataHC{
-    height: 2rem;
+  .head,.guessCity,.location,.titleHC,.dataHC,.titleSG,.dataSG{
+    height: 3rem;
   }
 
   /*1行4列表格*/
