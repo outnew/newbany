@@ -12,8 +12,6 @@
         <span class="tips fontBold">定位不准时，请在城市列表中选择</span>
       </div>
       <div class="location bb_new mcCenter">
-        <!--<span class="currentCity c31">{{guessCity.name}}</span>-->
-        <!--<router-link :to="'/searchLocation/'+guessCity.name">{{guessCity.name}}</router-link>-->
         <router-link  :to="{ name: 'searchlocation', params: { city: guessCity.name,id:guessCity.id }}" class="currentCity c31">{{guessCity.name}}</router-link>
         <span class="icon_arrow">&gt;</span>
       </div>
@@ -29,8 +27,8 @@
 
     <!--v-for 支持遍历对象  v-for="(val, key, index) in group" value:元素，key:属性，index:下标  -->
     <!--支持以computed下的数据源-->
-    <section v-for="(val, key, index) in sortGroup" :key="key" class="sortCity c31 bgcFF layoutCol">
-      <h5 class="titleSG bt_def br_def bb_def ti" style="flex: 1;">{{key}}</h5>
+    <section v-for="(val, key, index) in sortGroup" :key="key" class="sortCity c6 bgcFF layoutCol">
+      <h5 class="titleSG bt_def br_def bb_def ti" style="">{{key}}</h5>
       <ul class="box" style="flex-wrap: wrap;width: 100%;font-size: 14px;line-height: 3rem">
         <li class="dataSG bb_def br_def ellipsis" style="text-align: center"  v-for="item in val">{{item.name}}</li>
       </ul>
@@ -61,11 +59,10 @@
     methods:{
       getCity(type){
       let requestConfig = {
-        credentials: 'include',
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         mode: "cors",
         cache: "force-cache"
