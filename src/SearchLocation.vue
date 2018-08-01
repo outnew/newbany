@@ -46,8 +46,7 @@
         // console.log(this.$route.params);
         this.gCity = this.$route.params.city;
         this.city_id = this.$route.params.id;
-        this.address = localStorage.getItem("currentAddress");
-        console.log(localStorage.getItem("currentAddress").length)
+        this.address = JSON.parse(localStorage.getItem("currentAddress"));
       },
       methods: {
         goback: function (event) {
@@ -89,8 +88,8 @@
             var isStorageNULL = storage_ == "" || storage_ == undefined || storage_ == null
             storage_=isStorageNULL?[]:storage_;
             console.log("item:"+item);
-            storage_.push({item});
-            localStorage.setItem("currentAddress",storage_);
+            storage_.push(item);
+            localStorage.setItem("currentAddress",JSON.stringify(storage_));
           } else {
             // document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
 
