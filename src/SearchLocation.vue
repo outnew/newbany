@@ -10,18 +10,16 @@
       <!--<mt-search v-model="value" placeholder="输入学校、商务楼、地址" :autofocus="true" style="height: 3.3rem;"></mt-search>-->
       <!--<mt-button type="primary" size="large">提交</mt-button>-->
       <input type="search" placeholder="输入学校、商务楼、地址" class="ipt radius" v-model="value">
-      <button class="btn bgc_nav radius cFF fontBold" v-on:click="getAddress">提交</button>
+      <button  v-on:click="getAddress" class="btn bgc_nav radius cFF fontBold">提交</button>
     </section>
 
     <section>
-      <h5 class="bt_def bb_def" style="text-indent: 20px;">搜索历史</h5>
-      <ul>
-        <li v-for="item in address" class="layoutCol bgcFF bt_def bb_def" style="text-indent: 20px;" v-on:click="setStorage(item)">
-          <p class="ellipsis fsPri" style="color: #333;padding-top: 5px;margin-bottom: 5px;">{{item.name}}</p>
-          <p class="c9 ellipsis fsMin" style="padding-bottom: 5px;">{{item.address}}</p>
-        </li>
-      </ul>
-      <button class="clearAll bgcFF c9" v-on:click="clear"  v-show="false">清空所有</button>
+      <h5 class="bt_def bb_def" style="text-indent: 20px;" v-show="show">搜索历史</h5>
+      <router-link to="/Home" v-for="item in address" class="layoutCol bgcFF bt_def bb_def" style="text-indent: 20px;" v-on:click="setStorage(item)">
+        <p class="ellipsis fsPri" style="color: #333;padding-top: 5px;margin-bottom: 5px;">{{item.name}}</p>
+        <p class="c9 ellipsis fsMin" style="padding-bottom: 5px;">{{item.address}}</p>
+      </router-link>
+      <button class="btn clearAll bgcFF c9" v-on:click="clear" v-show="address&&address.length>0&&show">清空所有</button>
     </section>
 
 
@@ -29,9 +27,6 @@
 </template>
 
 <script>
-  // import {Search} from 'mint-ui';
-  // import {Button} from 'mint-ui';
-
     export default {
       name: "SearchLocation",
       data() {
@@ -39,21 +34,21 @@
           gCity: '',
           value: '',
           city_id: '',
-          address: []
+          address: [],
+          show:false
         }
       },
       mounted() {
-        // console.log(this.$route.params);
         this.gCity = this.$route.params.city;
         this.city_id = this.$route.params.id;
         this.address = JSON.parse(localStorage.getItem("currentAddress"));
+        this.show=this.address&&this.address.length>0;
       },
       methods: {
         goback: function (event) {
           this.$router.back(-1);
         },
         getAddress() {
-          console.log('getaddress');
           let requestConfig = {
             //Fetch 跨域请求时默认不带 cookie，需要时得手动指定 credentials: 'include'
             credentials: 'include',
@@ -73,29 +68,35 @@
             return response.json();
           }).then(resp => {
             this.address = resp;
-            console.log(JSON.stringify(this.address))
+            // console.log(JSON.stringify(this.address))
           })
         },
         clear() {
-          this.address = [];
+          localStorage.removeItem("currentAddress");
+          this.address = JSON.parse(localStorage.getItem("currentAddress"));
         },
         setStorage(item) {
-          console.log(item);
+          // console.log(item);
           if (window.localStorage) {
             //localStorage.setItem()存储JSON对象方法：存储前先用JSON.stringify()将json对象转换成字符串形式, JSON.stringify()可以将任意的JavaScript值序列化成JSON字符串
-            var storage_=localStorage.getItem("currentAddress");
-            console.log("storage:"+storage_);
-            var isStorageNULL = storage_ == "" || storage_ == undefined || storage_ == null
+            var storage_= JSON.parse(localStorage.getItem("currentAddress"));//JSON.parse()将一个JSON字符串转换为对象
+            var isStorageNULL = storage_ == "" || storage_ == undefined || storage_ == null;  //判断字符串类型，typeof()？
             storage_=isStorageNULL?[]:storage_;
-            console.log("item:"+item);
             storage_.push(item);
+            for(var i = 0; i < storage_.length; i++){
+              for(var j = i + 1; j < storage_.length; j++){
+                if(storage_[i].name ==storage_[j].name){
+                  storage_.splice(j,1);
+                  j--;
+                }
+              }
+            }
             localStorage.setItem("currentAddress",JSON.stringify(storage_));
-          } else {
-            // document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
 
+          }else{
+            // document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
           }
         },
-
       },
       components: {
         // Search,

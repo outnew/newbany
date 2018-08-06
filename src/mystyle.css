@@ -19,6 +19,9 @@
 .fsMin{
   font-size: 12px;
 }
+.fsCom{
+  font-size: 14px;
+}
 .fsPri{
   font-size: 16px;
 }
@@ -33,6 +36,9 @@
 }
 .cFF{
   color: white;
+}
+.cDan{
+  color: red;
 }
 
 /*背景色*/
@@ -135,7 +141,7 @@
   background-color: #f5f5f5;
 }
 
-.head{
+.headNav{
   width: 100%;
   background-color: #3190e8;
   position: fixed;
