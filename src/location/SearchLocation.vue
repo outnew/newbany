@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <section class="slNav bgc_nav mSBcC cFF">
       <div class="goBack" v-on:click="goback">&lt;</div>
       <div class="fontBold">{{gCity}}</div>
@@ -15,11 +15,12 @@
 
     <section>
       <h5 class="bt_def bb_def" style="text-indent: 20px;" v-show="show">搜索历史</h5>
-      <router-link to="/Home" v-for="item in address" class="layoutCol bgcFF bt_def bb_def" style="text-indent: 20px;" v-on:click="setStorage(item)">
-        <p class="ellipsis fsPri" style="color: #333;padding-top: 5px;margin-bottom: 5px;">{{item.name}}</p>
+      <div v-for="item in address" class="layoutCol bgcFF bt_def bb_def" style="text-indent: 20px;" v-on:click="setStorage(item)">
+        <p class="ellipsis fsPri c3" style="padding-top: 5px;margin-bottom: 5px;">{{item.name}}</p>
         <p class="c9 ellipsis fsMin" style="padding-bottom: 5px;">{{item.address}}</p>
-      </router-link>
-      <button class="btn clearAll bgcFF c9" v-on:click="clear" v-show="address&&address.length>0&&show">清空所有</button>
+      </div>
+      <button class="clearAll c3 fsPri bb_def bgcFF" v-on:click="clear" v-show="address&&address.length>0&&show">清空所有</button>
+      <div></div>
     </section>
 
 
@@ -39,9 +40,10 @@
         }
       },
       mounted() {
-        this.gCity = this.$route.params.city;
-        this.city_id = this.$route.params.id;
+        this.gCity = this.$route.query.city;
+        this.city_id = this.$route.query.id;
         this.address = JSON.parse(localStorage.getItem("currentAddress"));
+        // console.log(this.address);
         this.show=this.address&&this.address.length>0;
       },
       methods: {
@@ -71,7 +73,7 @@
             // console.log(JSON.stringify(this.address))
           })
         },
-        clear() {
+        clear(){
           localStorage.removeItem("currentAddress");
           this.address = JSON.parse(localStorage.getItem("currentAddress"));
         },
@@ -92,7 +94,7 @@
               }
             }
             localStorage.setItem("currentAddress",JSON.stringify(storage_));
-
+            this.$router.push({ name: 'Home', query: {location: item.name }})
           }else{
             // document.getElementById("result").innerHTML = "抱歉！您的浏览器不支持 Web Storage ...";
           }
@@ -137,8 +139,7 @@
   }
   .clearAll{
     width: 100%;
-    height: 2rem;
-    line-height: 2rem;
+    height: 3rem;
     text-align: center;
     flex: 1;
   }

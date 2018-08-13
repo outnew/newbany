@@ -1,29 +1,26 @@
 <template>
-  <ul class="bAllDef mcCenter column">
-    <ul>
-      <li>123</li>
-      <li>456</li>
-    </ul>
-  </ul>
+  <div>
+    <section>
+      <ul  style="display:flex;width: 500px;flex-wrap: wrap">
+        <li v-for="n in 12" style="width: 100px;height: 100px;box-sizing:border-box;border-bottom: 1px solid black;border-right: 1px solid black">{{n}}</li>
+      </ul>
+    </section>
+  </div>
 </template>
 
 <script>
+  import {Swipe,SwipeItem} from 'mint-ui';
     export default {
       name: "test",
-     mounted(){
-        var arr = [8,6,9,7,6,1,6,5,6,8,9,2];
-        for(var i=0;i<arr.length;i++){
-          for(var j=i+1;j<arr.length;j++){
-            console.log("i:"+i+"__j"+j+"____arri"+arr[i]+"__arrj"+arr[j]);
-            if(arr[i]==arr[j]){
-              arr.splice(j,1);  			//从自身开始数
-              j--;						//j--保证重复2次以上的元素不被遗漏
-            }
-          }
-        }
-        console.log(arr);
-    }
+      data(){
+        return{
 
+        }
+      },
+      components: {
+        mtSwipe:Swipe,
+        mtSwipeItem:SwipeItem
+      }
 
 
     }

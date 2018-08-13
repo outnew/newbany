@@ -25,6 +25,9 @@
 .fsPri{
   font-size: 16px;
 }
+.fsLar{
+  font-size: 18px;
+}
 .c31{
   color: #3190e8;
 }
@@ -33,6 +36,9 @@
 }
 .c9{
   color: #999;
+}
+.c3{
+  color: #333;
 }
 .cFF{
   color: white;
@@ -139,6 +145,8 @@
   font-weight: normal;
   font-family: Microsoft Yahei;
   background-color: #f5f5f5;
+  width: 100%;
+  height: 100%;
 }
 
 .headNav{

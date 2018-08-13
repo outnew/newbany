@@ -43,6 +43,10 @@ module.exports = {
             include: projectRoot,
             exclude: /node_modules/
         }, {
+            test: /\.sass$/,
+            loaders: ['style', 'css', 'sass']
+        },
+          {
             test: /\.json$/,
             loader: 'json'
         }, {

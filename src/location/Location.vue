@@ -10,12 +10,12 @@
         </div>
       </header>
 
-      <div class="guessCity bb_def mcCenter c6 fsMin">
+      <div class="guessCity bb_def mcCenter c6 fsMin" style="top:3rem">
         <span class="tipsLocation">当前定位城市：</span>
         <span class="tips fontBold">定位不准时，请在城市列表中选择</span>
       </div>
 
-      <router-link :to="{ name: 'searchLocation', params: { city: guessCity.name,id:guessCity.id }}"  class="location bb_new mcCenter">
+      <router-link :to="{ name: 'searchLocation', query: { city: guessCity.name,id:guessCity.id ,latitude:guessCity.latitude,longitude:guessCity.longitude}}"  class="location bb_new mcCenter">
         <span class="currentCity c31">{{guessCity.name}}</span>
         <span class="icon_arrow">&gt;</span>
       </router-link>
@@ -24,7 +24,7 @@
     <section class="hotCity layoutCol bgcFF c6">
       <h5 class="titleHC bt_def bb_def ti box" style="align-items: center">热门城市</h5>
       <div class="mcCenter wrap">
-        <router-link :to="{ name: 'searchLocation', params: { city: item.name,id:item.id }}" v-for="item in hotCity" :key="item.id"  class="mcCenter dataHC bb_def br_def c31">{{item.name}}</router-link>
+        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude}}" v-for="item in hotCity" :key="item.id"  class="mcCenter dataHC bb_def br_def c31">{{item.name}}</router-link>
       </div>
     </section>
 
@@ -33,7 +33,7 @@
     <section v-for="(val, key) in sortGroup" :key="key" class="sortCity bgcFF layoutCol">
       <h5 class="titleSG bt_def br_def bb_def ti" style="line-height: 3rem">{{key}}</h5>
       <div class="box fsCom wrap" style="width: 100%;">
-        <router-link :to="{ name: 'searchLocation', params: { city: item.name,id:item.id }}"  v-for="item in val" class="dataSG bb_def br_def ellipsis c6" style="line-height: 3rem">{{item.name}}</router-link>
+        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude }}"  v-for="item in val" class="dataSG bb_def br_def ellipsis c6" style="line-height: 3rem">{{item.name}}</router-link>
       </div>
     </section>
 
@@ -44,9 +44,6 @@
 <script>
   export default {
     name: 'Location',
-    components: {
-
-    },
     data() {
       return{
         guessCity: [],
@@ -70,7 +67,6 @@
         mode: "cors",
         cache: "force-cache"
       }
-
       var req=new Request("http://elm.cangdu.org:8001/v1/cities?type="+type,requestConfig);
       fetch(req).then(response=> {
         return response.json();
