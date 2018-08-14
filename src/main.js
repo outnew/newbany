@@ -5,6 +5,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
+import './componets/iconfont.js';
+
 
 import App from './App';
 import Test from './test';

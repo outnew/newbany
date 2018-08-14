@@ -11,19 +11,31 @@
             <section v-for="item in item.supports" :key="item.id" class="supports box" style="margin-right: 3px">{{item.icon_name}}</section>
           </div>
         </section>
-        <section v-if="item.delivery_mode">{{item.delivery_mode.text}}</section>
+
+        <!--<section style="position: relative;overflow: hidden;">-->
+          <!--&lt;!&ndash;<iconSvg icon-style="star-empty" icon-class="star" v-for="n in 5"></iconSvg>&ndash;&gt;-->
+          <!--<div style="position: absolute;top: 0;left: 0rem;" :style="'width:' + rating*2/5 + 'rem'"><iconSvg icon-style="star-full" icon-class="star" v-for="n in 5" ></iconSvg></div>-->
+         <!---->
+        <!--</section>-->
         <section>
-          <icon-base icon-name="write" width="20" height="20"><icon-write /></icon-base>-->
-          <icon-star icon-name="star"></icon-star>
+          <icon-star :rating="item.rating"></icon-star>
+          <div>{{item.rating}}</div>
         </section>
+        <section v-if="item.delivery_mode">{{item.delivery_mode.text}}</section>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+    import IconBase from "../componets/IconBase";
+    import IconStar from "../componets/IconStar";
     export default {
       name: "SellerList",
+      components: {
+        IconSvg:IconBase,
+        IconStar:IconStar
+      },
       data(){
           return{
             sellerList: [],
@@ -36,7 +48,7 @@
         this.latitude=this.$route.query.latitude;
         this.longitude=this.$route.query.longitude;
         this.getSellerList();
-        console.log("safddnh");
+        // console.log("safddnh");
       },
       methods:{
         getSellerList(){
@@ -71,4 +83,5 @@
     border-radius: 0.1rem;
     margin-right: 0.2rem;
   }
+
 </style>
