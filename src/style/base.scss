@@ -1,3 +1,5 @@
+$font-blue:#3190e8;
+
 /*公用*/
 html{
   font-size:62.5%; //10/16*100%=62.5% 默认10px的字号
@@ -37,7 +39,7 @@ html{
 
 /*字体颜色*/
 .tColorHL{
-  color: #3190e8;
+  color: $font-blue;
 }
 .tColorPri{
   color: #333;
@@ -118,11 +120,11 @@ html{
 
 /*flex布局*/
 .mainLcrossC{
-   display: flex;
-   flex-direction: row;
-   justify-content: flex-start;
-   align-items: center;
- }
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
 .mainSBcrossC{
   display: flex;
   flex-direction: row;
@@ -172,6 +174,7 @@ html{
   left: 0;
   top: 0;
 }
+
 
 
 
