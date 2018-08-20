@@ -1,39 +1,41 @@
 <template>
   <div id="app">
-    <section class="layoutCol hidden bgcFF">
-      <header class="headNav mLcC cFF">
-        <span class="head_logo">ele.me</span>
+    <section>
+      <header class="head">
+        <div class="headLogo">ele.me</div>
         <div>
-          <router-link to="/login" class="head_login cFF">登录</router-link>
-          <span>|</span>
-          <router-link to="/login" class="head_register cFF">注册</router-link>
+          <router-link to="/login" class="headLogin">登录</router-link>
+          <span class="sign">|</span>
+          <router-link to="/login" class="headRegister">注册</router-link>
         </div>
       </header>
 
-      <div class="guessCity bb_def mcCenter c6 fsMin" style="top:3rem">
-        <span class="tipsLocation">当前定位城市：</span>
-        <span class="tips fontBold">定位不准时，请在城市列表中选择</span>
-      </div>
+      <nav class="cityNav">
+        <div class="cityTips">
+          <span class="cityTipsL">当前定位城市：</span>
+          <span class="cityTipsR">定位不准时，请在城市列表中选择</span>
+        </div>
 
-      <router-link :to="{ name: 'searchLocation', query: { city: guessCity.name,id:guessCity.id ,latitude:guessCity.latitude,longitude:guessCity.longitude}}"  class="location bb_new mcCenter">
-        <span class="currentCity c31">{{guessCity.name}}</span>
-        <span class="icon_arrow">&gt;</span>
-      </router-link>
+        <router-link :to="{ name: 'searchLocation', query: { city: guessCity.name,id:guessCity.id ,latitude:guessCity.latitude,longitude:guessCity.longitude}}"  class="guessCity">
+          <span class="guessCityName">{{guessCity.name}}</span>
+          <span class="iconArrow">&gt;</span>
+        </router-link>
+      </nav>
     </section>
 
-    <section class="hotCity layoutCol bgcFF c6">
-      <h5 class="titleHC bt_def bb_def ti box" style="align-items: center">热门城市</h5>
-      <div class="mcCenter wrap">
-        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude}}" v-for="item in hotCity" :key="item.id"  class="mcCenter dataHC bb_def br_def c31">{{item.name}}</router-link>
+    <section class="hotCityBox">
+      <h5 class="titleHotCity">热门城市</h5>
+      <div class="hotCity">
+        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude}}" v-for="item in hotCity" :key="item.id"  class="dataHotCity">{{item.name}}</router-link>
       </div>
     </section>
 
     <!--v-for 支持遍历对象  v-for="(val, key, index) in group" value:元素，key:属性，index:下标  -->
     <!--支持以computed下的数据源-->
-    <section v-for="(val, key) in sortGroup" :key="key" class="sortCity bgcFF layoutCol">
-      <h5 class="titleSG bt_def br_def bb_def ti" style="line-height: 3rem">{{key}}</h5>
-      <div class="box fsCom wrap" style="width: 100%;">
-        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude }}"  v-for="item in val" class="dataSG bb_def br_def ellipsis c6" style="line-height: 3rem">{{item.name}}</router-link>
+    <section v-for="(val, key) in sortGroup" :key="key" class="sortGroup">
+      <h5 class="titleSortCity">{{key}}</h5>
+      <div class="sortCity">
+        <router-link :to="{ name: 'searchLocation', query: { city: item.name,id:item.id,latitude:item.latitude,longitude:item.longitude }}"  v-for="item in val" class="dataSortCity">{{item.name}}</router-link>
       </div>
     </section>
 
@@ -99,26 +101,85 @@
   }
 
 </script>
-<style>
-  .head_logo,.tipsLocation,.currentCity{
-    margin-left: 10px;
-    flex:1;
+<style lang="scss">
+  @import "src/style/base";
+
+  .head{
+    background-color: $blue;
+    position: fixed;
+    left: 0;
+    top: 0;
+    @include box($direction,$isWrap,space-between,center,$flex);
+
+      .headLogo,.headLogin,.sign,.headRegister {
+        color: $base-color*5;
+      }
   }
-  .head_register,.tips,.icon_arrow{
-    margin-right:10px;
+  .head,.cityTips,.guessCity, .titleHotCity,.dataHotCity,.titleSortCity,.dataSortCity{
+    @include width-height($width,$initial-px*3);
   }
-  .headNav,.guessCity,.location,.titleHC,.dataHC,.titleSG,.dataSG{
-    height: 3rem;
+  .headLogo,.cityTipsL,.guessCityName,.titleHotCity,.titleSortCity{
+    @include padding(padding-left,$initial-px);
+  }
+  .headRegister,.cityTipsR,.iconArrow{
+    @include padding(padding-right,$initial-px);
   }
 
-  /*1行4列表格*/
-  .dataHC,.dataSG{
-    width: 25%;
-    box-sizing: border-box;
+  .cityNav{
+    margin-top: $initial-px*3;
+
+      & .cityTips,.guessCity{
+        @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+        @include box($direction,$isWrap,space-between,center,$flex);
+        background-color: $base-color*5;
+      }
+      & .cityTips{
+          .cityTipsL{
+            color: $base-color*2;
+            @include font-face($normal,$normal,$initial-px*1.2,$familay);
+          }
+          .cityTipsR{
+            color: $base-color+#6C6C6C;
+            @include font-face($normal,$bolder,$initial-px*1.2,$familay);
+          }
+      }
+      & .guessCity{
+        @include font-face($normal,$normal,$initial-px*1.6,$familay);
+      }
   }
-  .dataSG{
-    text-align: center
+  .guessCityName,.dataHotCity{
+    color: $blue;
   }
+  .hotCityBox,.sortGroup{
+    margin-top: $initial-px;
+    background-color: $base-color*5;
+    color: $base-color*2;
+    @include width-height($width,$height);
+    @include border(border-top,$b-width,$b-style,$b-color,$radius);
+
+      .titleHotCity,.titleSortCity{
+        line-height: $initial-px*3;
+        @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+      }
+      .hotCity,.sortCity{
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .dataHotCity,.dataSortCity{
+        width: $width/4;
+        box-sizing: border-box;
+        @include border(border-right,$b-width,$b-style,$b-color,$radius);
+        @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+        text-align: center;
+        line-height: $initial-px*3;
+        @extend .ellipsis;
+      }
+      .dataSortCity{
+        color: $base-color*2;
+      }
+
+  }
+
 </style>
 
 

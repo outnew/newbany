@@ -1,92 +1,198 @@
-$font-blue:#3190e8;
+//变量
+$initial-value: 0 !default;
+$none:none !default;
+
+$initial-px: 1rem !default;
+
+$base-color: #333;
+$blue: #3190e8;
+$bgc-blank:#f5f5f5;
+$border-color:#e4e4e4;
+
+$width: 100% !default;
+$height: 100% !default;
 
 /*公用*/
 html{
-  font-size:62.5%; //10/16*100%=62.5% 默认10px的字号
+  font-size:62.5%;//10/16*100%=62.5% 默认字号10px
 }
+
 *,a,li,input,button{
-  padding:0;
-  margin:0;
-  text-decoration: none;
-  list-style: none;
-  outline: none;/*去掉chrome浏览器自带的点击input框出现边框情况*/
-  background:none;
-  border:0px;
-  -webkit-appearance: none; /*去掉按钮样式*/
+  padding:$initial-value;
+  margin:$initial-value;
+  text-decoration: $none;
+  list-style: $none;
+  outline: $none;/*去掉chrome浏览器自带的点击input框出现边框情况*/
+  background: $none;
+  border:$initial-value;
+  -webkit-appearance: $none; /*去掉按钮样式*/
   /*-webkit-appearance: button;*/
   /*使元素标签看起来像个按钮样式，意思定义了按钮样式*/
 }
 
-/*字体*/
-/*字体粗细*/
-.tBold{
-  font-weight: bolder;
+
+//宽高
+@mixin width-height($width, $height){
+  width: $width;
+  height: $height;
 }
 
-/*字体大小*/
-.tSizeMin{
-  font-size: 1.2rem;
-}
-.tSizeCom{
-  font-size: 1.4rem;
-}
-.tSizePri{
-  font-size: 1.6rem;
-}
-.tSizeMax{
-  font-size: 1.8rem;
+//邊框
+$b-width: $initial-px*0.1!default;
+$b-style: solid!default;
+$b-color: $border-color!default;
+$radius:$initial-value!default;
+$key: border!default;
+@mixin border($key,$b-width,$b-style,$b-color,$radius){
+  @if $key==border{
+    border:{
+      width: $b-width;
+      style: $b-style;
+      color: $b-color;
+      radius: $radius;
+    }
+  }@else if $key==border-top{
+    border-top:{
+      width: $b-width;
+      style: $b-style;
+      color: $b-color;
+      radius: $radius;
+    }
+  }@else if $key==border-right{
+    border-right:{
+      width: $b-width;
+      style: $b-style;
+      color: $b-color;
+      radius: $radius;
+    }
+  }@else if $key==border-bottom{
+    border-bottom:{
+      width: $b-width;
+      style: $b-style;
+      color: $b-color;
+      radius: $radius;
+    }
+  }@else{
+    border-top:{
+      width: $b-width;
+      style: $b-style;
+      color: $b-color;
+      radius: $radius;
+    }
+  }
 }
 
-/*字体颜色*/
-.tColorHL{
-  color: $font-blue;
-}
-.tColorPri{
-  color: #333;
-}
-.tColorDef{
-  color: #666;
-}
-.tColorDet{
-  color: #999;
-}
-.tColorCom{
-  color: white;
+//font: font-style | font-weight | font-size | font-family ;字体樣式、粗細、大小、系列、行高
+$normal: normal !default;
+$bolder: 900 !default;
+$familay: 'Microsoft YaHei', arial, sans-serif, 'Droid Sans Fallback';
+
+@mixin font-face($style,$weight,$size,$family) {
+  font: {
+    style: $style;
+    weight: $weight;
+    size: $size;
+    family: $family
+  };
 }
 
-/*文本溢出*/
-.tEllipsis{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+//内边距-padding
+$value:$initial-px !default;
+@mixin padding($key,$value){
+  @if $key==padding{
+    padding:$value;
+  }@else if $key==padding-top{
+    padding-top:$value;
+  }@else if $key==padding-right{
+    padding-right:$value;
+  }@else if $key==padding-bottom{
+    padding-bottom:$value;
+  }@else{
+    padding-left:$value;
+  }
 }
+
+//外边距-margin
+@mixin margin($key,$value){
+  @if $key==margin{
+    margin:$value;
+  }@else if $key==margin-top{
+    margin-top:$value;
+  }@else if $key==margin-right{
+    margin-right:$value;
+  }@else if $key==margin-bottom{
+    margin-bottom:$value;
+  }@else{
+    margin-left:$value;
+  }
+}
+
+
+
+// 背景图片地址和大小
+@mixin bis($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+
+
+//定位全屏
+@mixin allcover{
+  position:absolute;
+  top:0;
+  right:0;
+}
+
+//定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin ct{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//定位上下居中
+@mixin cl{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+//flex 布局和 子元素 对其方式
+
+.clear{
+  width:100%;
+  margin:0 auto;
+  *zoom:1;
+  &:before,&:after{
+    display:table;
+    content:""
+  }
+  &:after{
+    clear:both
+  }
+}
+
+
+
 
 /*首行文本缩进*/
 .tIndent_def{
-  text-indent: 10px;
-}
-
-/*背景色*/
-.bgcDef{
-  background-color: #f5f5f5;
-}
-.bgcPri{
-  background-color: white;
+  text-indent: $initial-px;
 }
 
 /*盒模型*/
-/*宽*/
-.widthDef{
-  width: 100%;
-}
-.widthTab{
-  width: 25%;
-}
-
-/*盒模型-外边距*/
-.marTop_def{
-  margin-top: 10px;
-}
 
 /*盒模型-边框*/
 .borderT_def{
@@ -105,77 +211,38 @@ html{
   border-left: 0.1rem solid #e4e4e4;
 }
 
-/*圆角*/
-.radius_pri{
-  border-radius: 0.4rem;
-}
-.radius_def{
-  border-radius: 0.2rem;
-}
 
 /*定位*/
+$hide:hidden;
 .hidden{
-  overflow: hidden;
+  overflow: $hide;
 }
 
 /*flex布局*/
-.mainLcrossC{
+
+$direction: row !default;
+$isWrap: nowrap !default;
+$flex: $initial-value !default;
+@mixin box($direction,$isWrap,$x-type,$y-type,$flex){
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-.mainSBcrossC{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.mainSAcrossC{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-.mcCenter{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: $direction;
+  flex-wrap: $isWrap;
+  justify-content: $x-type;
+  align-items: $y-type;
+  flex: $flex;
 }
 
-/*排列方向*/
-.directionV{
-  display: flex;
-  flex-direction: column;
-}
-
-.box{
-  display: flex;
-}
-.boxInline{
-  display: inline-flex;
-}
-
-.wrap{
-  display: flex;
-  flex-wrap: wrap;
-}
-.nowrap{
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-/*具体页面*/
-.headNav{
-  width: 100%;
-  background-color: #3190e8;
-  position: fixed;
-  left: 0;
-  top: 0;
+/*文本溢出*/
+.ellipsis{
+  overflow: $hide;
+  text-overflow: ellipsis;
+  white-space: $isWrap;
 }
 
 
-
-
+#app{
+  @include width-height($width,$height);
+  @include font-face($normal,$normal,$initial-px*1.4,$familay);
+  background-color: $bgc-blank;
+}
 

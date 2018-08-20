@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <section class="slNav bgc_nav mSBcC cFF">
+    <header class="slNav">
       <div class="goBack" v-on:click="goback">&lt;</div>
       <div class="fontBold">{{gCity}}</div>
       <div class="changeCity" v-on:click="goback">切换城市</div>
-    </section>
+    </header>
 
     <section class="searchBar bgcFF bt_def bb_def layoutCol" style="height: 5.5rem;">
       <!--<mt-search v-model="value" placeholder="输入学校、商务楼、地址" :autofocus="true" style="height: 3.3rem;"></mt-search>-->
@@ -107,9 +107,22 @@
     }
 </script>
 
-<style>
+<style lang="scss">
+  @import "src/style/base";
+
   .slNav{
-    height: 3rem;
+    @include width-height($width,$initial-px*3);
+    @include box($direction,$isWrap,space-between,center,$flex);
+    background-color: $blue;
+    color: $base-color*5;
+    @include font-face($normal,$bolder,$initial-px*1.6,$familay);
+
+      .goBack{
+        margin-left: $initial-px;
+      }
+      .changeCity{
+        margin-right: $initial-px;
+      }
   }
   .searchBar{
     display: flex;
@@ -128,12 +141,7 @@
   .bgc_nav{
     background-color: #3190e8;
   }
-  .goBack{
-    margin-left: 10px;
-  }
-  .changeCity{
-    margin-right: 10px;
-  }
+
   .searchBar{
     margin-top: 10px;
   }

@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <section>
-      <ul  style="display:flex;width: 500px;flex-wrap: wrap">
-        <li v-for="n in 12" style="width: 100px;height: 100px;box-sizing:border-box;border-bottom: 1px solid black;border-right: 1px solid black">{{n}}</li>
-      </ul>
-    </section>
+  <div class="ul_container">
+    颠三倒四
   </div>
 </template>
 
@@ -27,7 +23,13 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import 'src/style/base';
+  .ul_container{
+    @include width-height($width, 35rem);
+    @include font-face($normal,900,$initial-px,$familay);
+
+  }
   *{
     margin: 0;
     padding: 0;
@@ -41,7 +43,7 @@
     align-items: center;
   }
   .bAllDef{
-    border: 1px solid black;
+    border: 0.1rem solid black;
   }
   .column{
     flex-direction: column;

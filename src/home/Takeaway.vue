@@ -21,7 +21,7 @@
 
     <section>
       <mt-cell title="附近商家" style="margin-top: 10px;">
-        <img slot="icon" src="../../images/home_t_store.png" width="24" height="24">
+        <img slot="icon" src="../images/home_t_store.png" width="24" height="24">
       </mt-cell>
       <seller-list style="margin-bottom: 7rem"></seller-list>
       <!--<mt-cell v-for="seller in sellers"></mt-cell>-->
