@@ -1,8 +1,7 @@
 <template>
   <div style="position: relative">
-
     <mt-tab-container v-model="active">
-      <mt-tab-container-item id="takeaway" class="box wrap" style="flex-direction: row">
+      <mt-tab-container-item id="takeaway"  style="display: flex;">
         <v-takeaway style="width: 100%"></v-takeaway>
       </mt-tab-container-item>
       <mt-tab-container-item id="order">

@@ -1,28 +1,26 @@
 <template>
-  <div id="app">
+  <div>
     <header class="slNav">
       <div class="goBack" v-on:click="goback">&lt;</div>
-      <div class="fontBold">{{gCity}}</div>
+      <div class="gCity">{{gCity}}</div>
       <div class="changeCity" v-on:click="goback">切换城市</div>
     </header>
 
-    <section class="searchBar bgcFF bt_def bb_def layoutCol" style="height: 5.5rem;">
+    <section class="searchBar">
       <!--<mt-search v-model="value" placeholder="输入学校、商务楼、地址" :autofocus="true" style="height: 3.3rem;"></mt-search>-->
       <!--<mt-button type="primary" size="large">提交</mt-button>-->
-      <input type="search" placeholder="输入学校、商务楼、地址" class="ipt radius" v-model="value">
-      <button  v-on:click="getAddress" class="btn bgc_nav radius cFF fontBold">提交</button>
+      <input type="search" placeholder="输入学校、商务楼、地址" class="ipt" v-model="value">
+      <button  v-on:click="getAddress" class="btn">提交</button>
     </section>
 
-    <section>
-      <h5 class="bt_def bb_def" style="text-indent: 20px;" v-show="show">搜索历史</h5>
-      <div v-for="item in address" class="layoutCol bgcFF bt_def bb_def" style="text-indent: 20px;" v-on:click="setStorage(item)">
-        <p class="ellipsis fsPri c3" style="padding-top: 5px;margin-bottom: 5px;">{{item.name}}</p>
-        <p class="c9 ellipsis fsMin" style="padding-bottom: 5px;">{{item.address}}</p>
+    <section class="records">
+      <h5 class="recordsTitle" v-show="show">搜索历史</h5>
+      <div v-for="item in address" class="recordsList" v-on:click="setStorage(item)">
+        <p class="recordsName">{{item.name}}</p>
+        <p class="recordsAddress">{{item.address}}</p>
       </div>
-      <button class="clearAll c3 fsPri bb_def bgcFF" v-on:click="clear" v-show="address&&address.length>0&&show">清空所有</button>
-      <div></div>
+      <button class="clearAll" v-on:click="clear" v-show="address&&address.length>0&&show" style="margin-bottom: 22rem">清空所有</button>
     </section>
-
 
   </div>
 </template>
@@ -107,49 +105,83 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "src/style/base";
 
   .slNav{
     @include width-height($width,$initial-px*3);
-    @include box($direction,$isWrap,space-between,center,$flex);
     background-color: $blue;
     color: $base-color*5;
-    @include font-face($normal,$bolder,$initial-px*1.6,$familay);
+    @include box($direction,$isWrap,space-between,center,$flex);
 
-      .goBack{
-        margin-left: $initial-px;
-      }
-      .changeCity{
-        margin-right: $initial-px;
-      }
+    .gCity{
+      @include font-face($normal,$bolder,$initial-px*1.6,$familay);
+    }
+    .goBack{
+      margin-left: $initial-px;
+    }
+    .changeCity{
+      margin-right: $initial-px;
+      @include font-face($normal,$normal,$initial-px*1.2,$familay);
+    }
   }
   .searchBar{
+    @include width-height($width,$initial-px*6);
+    margin-top: $initial-px;
     display: flex;
     align-items: center;
+    background-color: $base-color*5;
+    @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+    @include border(border-top,$b-width,$b-style,$b-color,$radius);
+    @include box(column,$isWrap,space-around,center,$flex);
+
+    .ipt,.btn{
+      @include width-height(90%,$initial-px*2);
+    }
+    .ipt{
+      border: 1px solid #e4e4e4;
+      text-indent: 0.5rem;
+    }
+    .btn{
+      background-color: $blue;
+      color: $base-color*5;
+      font-weight: bold;
+      border-radius: $initial-px*0.2;
+      margin-top: -0.8rem;
+    }
   }
-  .ipt,.btn{
-    height: 2rem;
-    width: 90%;
-    margin-top: 0.5rem;
-    box-sizing: border-box;
-  }
-  .ipt{
-    border: 1px solid #e4e4e4;
-    padding-left: 0.5rem;
-  }
-  .bgc_nav{
-    background-color: #3190e8;
+  .records{
+
+    .recordsTitle{
+      @include width-height($width,$initial-px*1.5);
+      @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+      @include border(border-top,$b-width,$b-style,$b-color,$radius);
+      padding-left: $initial-px;
+      text-align: left;
+      line-height: $initial-px*1.5;
+      color: $base-color;
+
+    }
+    .recordsList,.clearAll{  background-color: $base-color*5;}
+    .recordsList{
+      @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+      @include box(column,$isWrap,space-around,left,$flex);
+      padding-left: $initial-px;
+      @include width-height($width,$initial-px*5);
+
+      .recordsAddress{
+        color: $base-color*3;
+      }
+    }
+    .recordsName,.clearAll{
+      color: $base-color;
+    }
+    .clearAll{
+      @include width-height($width,$initial-px*4);
+      flex: 1;
+      @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+    }
   }
 
-  .searchBar{
-    margin-top: 10px;
-  }
-  .clearAll{
-    width: 100%;
-    height: 3rem;
-    text-align: center;
-    flex: 1;
-  }
 
 </style>

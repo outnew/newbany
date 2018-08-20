@@ -1,18 +1,20 @@
 <template>
   <div>
-    <section style="width: 100%;height: 6rem;" class="box bb_def bgcFF" v-for="item in sellerList" :key="item.id">
-      <div style="width: 25%;" class="box mcCenter">
+    <section class="sellerBox" v-for="item in sellerList" :key="item.id">
+      <div class="sellerImg">
         <img :src="imgUrl+item.image_path" slot="icon" width="64" height="64">
       </div>
-      <div style="flex:1;" class="fsMin">
-        <section class="box" style="height: 2rem;align-items: center;justify-content: space-between">
-          <div class="br_def fontBold c3 fsCom" :class="item.is_premium? 'premium': ''">{{item.name}}</div>
-          <div class="box fsMin c6">
-            <section v-for="item in item.supports" :key="item.id" class="supports box" style="margin-right: 6px">{{item.icon_name}}</section>
+      <div class="sellerInfo">
+        <section class="infoT">
+          <div class="sellerName" :class="item.is_premium? 'premium': ''">{{item.name}}</div>
+          <div class="supportsBox fsMin c6">
+            <span v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</span>
           </div>
         </section>
 
-        <section class="mSBcC bb_def" style="height: 2rem">
+        <section class="infoM mSBcC bb_def" style="height: 2rem">
+
+
           <section class="mSBcC">
             <span ><icon-star :rating="item.rating"></icon-star></span>
             <span style="color: #ff6000;">{{item.rating}}</span>
@@ -24,7 +26,7 @@
           </section >
         </section>
 
-        <section class="box c6 mSBcC">
+        <section class="infoB box c6 mSBcC">
           <p>
             ¥{{item.float_minimum_order_amount}}起送
             <span class="segmentation">/</span>
@@ -111,7 +113,8 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import "src/style/base";
   .premium:before{
     content: '品牌';
     display: inline-block;
@@ -120,5 +123,33 @@
     border-radius: 0.1rem;
     margin-right: 0.2rem;
   }
+  .sellerBox{
+    @include width-height($width,$initial-px*6);
+    @include border(border-top,$b-width,$b-style,$b-color,$radius);
+    @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+    @include box($direction,$isWrap,center,center,$flex);
+    background-color: $base-color*5;
+    .sellerImg{
+       @include width-height($width/4,$height);
+       @include box($direction,$isWrap,center,center,$flex);
+     }
+    .sellerInfo{
+      flex: 1;
+
+      .infoT{
+        @include box($direction,$isWrap,space-between,center,$flex);
+        @include width-height($width,$initial-px*2);
+        @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+        .sellerName{
+          color: $base-color;
+          @include font-face($normal,$bolder,$initial-px*1.4,$familay);
+        }
+      }
+
+    }
+  }
+
+
+
 
 </style>
