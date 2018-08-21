@@ -8,7 +8,7 @@
     </mt-header>
 
     <section class="swipe">
-      <mt-swipe :auto="0" style="top:0;left:0;">
+      <mt-swipe :auto="5000" style="top:0;left:0;">
         <mt-swipe-item v-for="item in sortList">
           <div class="dataSwipe" v-for="i in item.arr">
             <img :src="i.img" slot="icon" width="32" height="32">
@@ -23,7 +23,6 @@
         <img slot="icon" src="../images/home_t_store.png" width="24" height="24">
       </mt-cell>
       <seller-list style="margin-bottom: 7rem"></seller-list>
-      <!--<mt-cell v-for="seller in sellers"></mt-cell>-->
     </section>
 
   </div>
@@ -31,7 +30,7 @@
 
 <script>
   import SellerList from './SellerList';
-
+  import  fetch  from '../fetch'
   export default {
     name: "Takeaway",
     data() {
@@ -48,20 +47,7 @@
     },
     methods:{
       getSortList(){
-        let requestConfig = {
-          method: 'GET',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          mode: "cors",
-          cache: "force-cache"
-        }
-        var req=new Request("https://elm.cangdu.org/v2/index_entry",requestConfig);
-        fetch(req).then(response=> {
-          return response.json();
-        }).then(resp => {
-
+        fetch('v2/index_entry').then(resp => {
           console.log(resp);
           //分頁，2*8頁
           for(let i = 0 ;i<resp.length/8;i++) {
@@ -99,7 +85,8 @@
      // @include box(column,wrap,center,center,$flex);
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
       /*flex: 1;*/
       //align-items: center;
 

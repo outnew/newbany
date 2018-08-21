@@ -1,13 +1,5 @@
 <template>
-  <div  style="position: relative;overflow: hidden;">
-      <!--<section style="width: 4rem;background-color: #26a2ff">-->
-        <!--<iconSvg icon-style="star-empty" icon-class="star" v-for="n in 5"></iconSvg>-->
-      <!--</section>-->
-
-        <!--<section style="position: absolute;top: 0;left: 0px;" :style="'width:'+rating*4/5+'rem'">-->
-          <!--<iconSvg icon-style="star-full" icon-class="star" v-for="n in 5" ></iconSvg>-->
-        <!--</section>-->
-
+  <div >
     <section style="width: 4rem;height: 1rem;padding: 0">
       <iconSvg icon-style="star-empty" icon-class="star" v-for="n in 5"></iconSvg>
     </section>
@@ -38,7 +30,7 @@
         rating:Number
       },
       mounted(){
-        console.log("rating:"+this.rating*4/5)
+        // console.log("rating:"+this.rating*4/5)
       }
     }
 </script>

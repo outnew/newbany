@@ -49,27 +49,18 @@
           this.$router.back(-1);
         },
         getAddress() {
-          let requestConfig = {
-            //Fetch 跨域请求时默认不带 cookie，需要时得手动指定 credentials: 'include'
-            credentials: 'include',
-            //Fecth 模拟表单提交
-            method: 'GET',
-            //Fecth 获取 HTTP 头信息
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            mode: "cors",
-            cache: "force-cache"
-          }
-
-          var req = new Request("https://elm.cangdu.org/v1/pois?city_id=" + this.city_id + "&keyword=" + this.value + "&type=search", requestConfig);
-          fetch(req).then(response => {
-            return response.json();
-          }).then(resp => {
-            this.address = resp;
-            // console.log(JSON.stringify(this.address))
+          fetch('v1/pois',{city_id:this.city_id,keyword:this.value,type:'search'}).then(resp => {
+                this.address = resp;
+                // console.log(JSON.stringify(this.address))
           })
+
+          // var req = new Request("https://elm.cangdu.org/v1/pois?city_id=" + this.city_id + "&keyword=" + this.value + "&type=search", requestConfig);
+          // fetch(req).then(response => {
+          //   return response.json();
+          // }).then(resp => {
+          //   this.address = resp;
+          //   // console.log(JSON.stringify(this.address))
+          // })
         },
         clear(){
           localStorage.removeItem("currentAddress");

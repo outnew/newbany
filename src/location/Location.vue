@@ -44,61 +44,54 @@
 </template>
 
 <script>
+  import  fetch  from '../fetch'
   export default {
     name: 'Location',
     data() {
-      return{
+      return {
         guessCity: [],
         hotCity: [],
         group: []
       }
     },
-    beforeMount(){
+    beforeMount() {
       this.getCity('guess');
       this.getCity('hot');
       this.getCity('group');
     },
-    methods:{
-      getCity(type){
-      let requestConfig = {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        mode: "cors",
-        cache: "force-cache"
-      }
-      var req=new Request("http://elm.cangdu.org:8001/v1/cities?type="+type,requestConfig);
-      fetch(req).then(response=> {
-        return response.json();
-      }).then(resp=> {
-        if(type=="guess"){
-          this.guessCity = resp;
-        }else if(type=="hot"){
-          this.hotCity = resp;
-        }else{
-          this.group = resp;
-        }
-      })
-    }
-  },
-    computed:{
-      // 对数组进行排序  依次A-Z
-      sortGroup(){
-        let sortobj = {};
-        for (let i = 65; i <= 90; i++) {
-          // A-Z ASCII 值依次是 65-90
-          if (this.group[String.fromCharCode(i)]) {
-            //等同于 this.group[A]  this.group[B] this.group[C]  .........
-            sortobj[String.fromCharCode(i)] = this.group[String.fromCharCode(i)];
-            //等同于 sortobj[A] = this.group[A]  sortobj[B] = this.group[B] .......  依A-Z顺序往sort对象中添加数据
+    methods: {
+      getCity(type) {
+
+        fetch('v1/cities', {type: type}).then(resp => {
+          console.log('resp')
+          if (type == "guess") {
+            this.guessCity = resp;
+          } else if (type == "hot") {
+            this.hotCity = resp;
+          } else {
+            this.group = resp;
           }
+        })
+
+      }
+    },
+      computed: {
+        // 对数组进行排序  依次A-Z
+        sortGroup() {
+          let sortobj = {};
+          for (let i = 65; i <= 90; i++) {
+            // A-Z ASCII 值依次是 65-90
+            if (this.group[String.fromCharCode(i)]) {
+              //等同于 this.group[A]  this.group[B] this.group[C]  .........
+              sortobj[String.fromCharCode(i)] = this.group[String.fromCharCode(i)];
+              //等同于 sortobj[A] = this.group[A]  sortobj[B] = this.group[B] .......  依A-Z顺序往sort对象中添加数据
+            }
+          }
+          return sortobj;//返回sort 在v-for中使用
         }
-        return sortobj;//返回sort 在v-for中使用
       }
     }
-  }
+
 
 </script>
 <style lang="scss">

@@ -1,32 +1,31 @@
 <template>
   <div>
-    <section class="sellerBox" v-for="item in sellerList" :key="item.id">
+    <router-link :to="{path: 'Seller', query:{id: item.id}}" class="sellerBox" v-for="item in sellerList" :key="item.id">
       <div class="sellerImg">
         <img :src="imgUrl+item.image_path" slot="icon" width="64" height="64">
       </div>
       <div class="sellerInfo">
-        <section class="infoT">
+        <section class="info">
           <div class="sellerName" :class="item.is_premium? 'premium': ''">{{item.name}}</div>
           <div class="supportsBox fsMin c6">
             <span v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</span>
           </div>
         </section>
-
-        <section class="infoM mSBcC bb_def" style="height: 2rem">
-
-
-          <section class="mSBcC">
-            <span ><icon-star :rating="item.rating"></icon-star></span>
+        <section class="info mSBcC bb_def" style="height: 2rem">
+          <div class="grade">
+            <span style="flex: 1">
+            <icon-star :rating="item.rating"></icon-star>
+              </span>
             <span style="color: #ff6000;">{{item.rating}}</span>
-            <span class="c6">月售{{item.recent_order_num}}单</span>
-          </section>
-          <section>
-            <span v-if="item.delivery_mode" style="background-color: #26a2ff;border-radius: 2px;" class="cFF fsMin">{{item.delivery_mode.text}}</span>
-            <span style="margin-right: 10px;border: 1px solid #26a2ff;color: #26a2ff;border-radius: 2px;">{{zhunshi(item.supports)}}</span>
-          </section >
+            <span class="saleNum" :class="item.rating_count? 'saleNum': ''">{{item.rating_count}}</span>
+          </div>
+          <div>
+            <span v-if="item.delivery_mode" class="delivery">{{item.delivery_mode.text}}</span>
+            <span class="onTime">{{zhunshi(item.supports)}}</span>
+          </div >
         </section>
 
-        <section class="infoB box c6 mSBcC">
+        <section class="info">
           <p>
             ¥{{item.float_minimum_order_amount}}起送
             <span class="segmentation">/</span>
@@ -39,12 +38,12 @@
 							</span>
             <span v-else>{{item.distance}}</span>
             <span class="segmentation">/</span>
-            <span class="order_time" style="margin-right: 10px;">{{item.order_lead_time}}</span>
+            <span class="order_time" style="margin-right: 0.4rem;">{{item.order_lead_time}}</span>
           </p>
         </section>
 
       </div>
-    </section>
+    </router-link>
 
   </div>
 </template>
@@ -74,22 +73,27 @@
       },
       methods:{
         getSellerList(){
-          let requestConfig = {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            mode: "cors",
-            cache: "force-cache"
-          };
-          var req=new Request("https://elm.cangdu.org/shopping/restaurants?latitude="+this.latitude+"&longitude="+this.longitude,requestConfig);
-          fetch(req).then(response=> {
-            return response.json();
-          }).then(resp => {
-            console.log(resp);
+          // let requestConfig = {
+          //   method: 'GET',
+          //   headers: {
+          //     'Accept': 'application/json',
+          //     'Content-Type': 'application/json',
+          //   },
+          //   mode: "cors",
+          //   cache: "force-cache"
+          // };
+          // var req=new Request("https://elm.cangdu.org/shopping/restaurants?latitude="+this.latitude+"&longitude="+this.longitude,requestConfig);
+          // fetch(req).then(response=> {
+          //   return response.json();
+          // }).then(resp => {
+          //   console.log(resp);
+          //   this.sellerList = resp;
+          // })
+
+          fetch('shopping/restaurants', {latitude:this.latitude,longitude:this.longitude}).then(resp => {
             this.sellerList = resp;
           })
+
         },
         zhunshi(supports){
             let zhunStatus;
@@ -98,7 +102,7 @@
               supports.forEach(item => {
                 if (item.icon_name === '准') {
                   zhunStatus = item.name;
-                  console.log(item.name);
+                  // console.log(item.name);
                 }
               })
             }else{
@@ -123,26 +127,76 @@
     border-radius: 0.1rem;
     margin-right: 0.2rem;
   }
+  .saleNum:before{
+    content: '月售';
+    display: inline-block;
+    padding: 0 0.1rem;
+  }
+  .saleNum:after{
+    content: '单';
+    display: inline-block;
+    padding: 0 0.1rem;
+  }
   .sellerBox{
     @include width-height($width,$initial-px*6);
-    @include border(border-top,$b-width,$b-style,$b-color,$radius);
     @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
     @include box($direction,$isWrap,center,center,$flex);
     background-color: $base-color*5;
     .sellerImg{
        @include width-height($width/4,$height);
-       @include box($direction,$isWrap,center,center,$flex);
+       //@include box($direction,$isWrap,center,center,$flex);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: text-bottom;
      }
     .sellerInfo{
       flex: 1;
-
-      .infoT{
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      .info{
         @include box($direction,$isWrap,space-between,center,$flex);
-        @include width-height($width,$initial-px*2);
-        @include border(border-bottom,$b-width,$b-style,$b-color,$radius);
+        @include font-face($normal,$normal,$initial-px,$familay);
+        //@include border(border-bottom,$b-width,$b-style,$b-color,$radius);
         .sellerName{
           color: $base-color;
-          @include font-face($normal,$bolder,$initial-px*1.4,$familay);
+          @include font-face($normal,$bolder,$initial-px*0.8,$familay);
+        }
+        .supportsBox{
+          display: flex;
+          /*padding-right: 1rem;*/
+              .supports{
+                margin-right: 0.4rem;
+                @include font-face($normal,$normal,$initial-px*0.8,$familay);
+                color: $base-color*3;
+              }
+        }
+        .grade{
+          display: flex;
+          justify-content:center;
+          align-items: center;
+          //@include box($direction,$isWrap,space-around,center,$flex);
+          @include font-face($normal,$normal,$initial-px*0.8,$familay);
+          & span{
+            padding-right: 0.2rem;
+          }
+        }
+
+        .delivery{
+          font-size: 1rem;
+          border-radius: 0.2rem;
+          background-color: #26a2ff;
+          color: $base-color*5;
+        }
+        .onTime{
+          font-size: 1rem;
+          border-radius: 0.2rem;
+          margin-right: 1rem;
+          border: 1px solid #26a2ff;
+          color: #26a2ff;
+        }
+        .saleNum{
+          display: flex;
         }
       }
 
