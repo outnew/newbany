@@ -7,8 +7,6 @@
     </header>
 
     <section class="searchBar">
-      <!--<mt-search v-model="value" placeholder="输入学校、商务楼、地址" :autofocus="true" style="height: 3.3rem;"></mt-search>-->
-      <!--<mt-button type="primary" size="large">提交</mt-button>-->
       <input type="search" placeholder="输入学校、商务楼、地址" class="ipt" v-model="value">
       <button  v-on:click="getAddress" class="btn">提交</button>
     </section>
@@ -26,6 +24,7 @@
 </template>
 
 <script>
+  import  fetch  from '../fetch'
     export default {
       name: "SearchLocation",
       data() {
@@ -50,17 +49,9 @@
         },
         getAddress() {
           fetch('v1/pois',{city_id:this.city_id,keyword:this.value,type:'search'}).then(resp => {
-                this.address = resp;
-                // console.log(JSON.stringify(this.address))
+            this.address = resp;
+            // console.log(JSON.stringify(this.address))
           })
-
-          // var req = new Request("https://elm.cangdu.org/v1/pois?city_id=" + this.city_id + "&keyword=" + this.value + "&type=search", requestConfig);
-          // fetch(req).then(response => {
-          //   return response.json();
-          // }).then(resp => {
-          //   this.address = resp;
-          //   // console.log(JSON.stringify(this.address))
-          // })
         },
         clear(){
           localStorage.removeItem("currentAddress");
@@ -142,7 +133,7 @@
     }
   }
   .records{
-
+    font-size: 1.2rem;
     .recordsTitle{
       @include width-height($width,$initial-px*1.5);
       @include border(border-bottom,$b-width,$b-style,$b-color,$radius);

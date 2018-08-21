@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{path: 'Seller', query:{id: item.id}}" class="sellerBox" v-for="item in sellerList" :key="item.id">
+    <router-link :to="{path: 'Seller', query:{latitude:item.latitude,longitude:item.longitude,name:item.name,id: item.id}}" class="sellerBox" v-for="item in sellerList" :key="item.id">
       <div class="sellerImg">
         <img :src="imgUrl+item.image_path" slot="icon" width="64" height="64">
       </div>
@@ -51,6 +51,8 @@
 <script>
     import IconBase from "../componets/IconBase";
     import IconStar from "../componets/IconStar";
+    import  fetch  from '../fetch'
+
     export default {
       name: "SellerList",
       components: {
@@ -73,27 +75,9 @@
       },
       methods:{
         getSellerList(){
-          // let requestConfig = {
-          //   method: 'GET',
-          //   headers: {
-          //     'Accept': 'application/json',
-          //     'Content-Type': 'application/json',
-          //   },
-          //   mode: "cors",
-          //   cache: "force-cache"
-          // };
-          // var req=new Request("https://elm.cangdu.org/shopping/restaurants?latitude="+this.latitude+"&longitude="+this.longitude,requestConfig);
-          // fetch(req).then(response=> {
-          //   return response.json();
-          // }).then(resp => {
-          //   console.log(resp);
-          //   this.sellerList = resp;
-          // })
-
           fetch('shopping/restaurants', {latitude:this.latitude,longitude:this.longitude}).then(resp => {
             this.sellerList = resp;
           })
-
         },
         zhunshi(supports){
             let zhunStatus;
@@ -111,7 +95,6 @@
             return zhunStatus;
         }
       }
-
 
 
     }

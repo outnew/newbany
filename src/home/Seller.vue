@@ -1,19 +1,38 @@
 <template>
   <div>
-    <mt-header title="标题过长会隐藏后面的内容啊哈哈哈哈">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
-        <img src="" slot="icon">
-      </router-link>
-      <mt-button icon="next" slot="right"></mt-button>
-    </mt-header>
-
+    <mt-header :title='item.name' v-for="item in shopInfo">
+    <router-link to="/" slot="left">
+      <mt-button icon="back"></mt-button>
+      <img :src="item.image_path" slot="icon" width="32" height="32">
+    </router-link>
+    <mt-button icon="more" slot="right"></mt-button>
+  </mt-header>
   </div>
 </template>
 
 <script>
+  import  fetch  from '../fetch'
     export default {
-        name: "Seller"
+      name: "Seller",
+      data(){
+        return{
+          shopInfo:[]
+        }
+      },
+      mounted(){
+        this.latitude=this.$route.query.latitude;
+        this.longitude=this.$route.query.longitude;
+        this.name=this.$route.query.name;
+        this.getShopInfo();
+      },
+      methods:{
+        getShopInfo(){
+          fetch('v4/restaurants', {geohash: this.latitude&this.longitude,keyword:this.name}).then(resp => {
+            this.shopInfo= resp;
+
+          })
+        }
+      }
     }
 </script>
 
