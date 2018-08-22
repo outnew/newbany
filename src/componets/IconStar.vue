@@ -36,9 +36,7 @@
 </script>
 
 <style scoped>
-  .star_overflow{
 
-  }
   .star-empty{
     width: 0.8rem;
     height: 0.8rem;

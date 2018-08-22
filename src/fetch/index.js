@@ -33,9 +33,10 @@ export  default  async(url,data,type="GET",method='fetch')=>{
       }
     }
   }
-  console.log(url);
+
   const response = await fetch(url, requestConfig);
   const responseJson = await response.json();
+  console.log("respnseJSON:"+JSON.stringify(responseJson));
   return responseJson;
 
 }

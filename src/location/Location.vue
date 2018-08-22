@@ -61,7 +61,6 @@
     },
     methods: {
       getCity(type) {
-
         fetch('v1/cities', {type: type}).then(resp => {
           console.log('resp')
           if (type == "guess") {

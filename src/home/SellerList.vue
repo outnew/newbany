@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{path: 'Seller', query:{latitude:item.latitude,longitude:item.longitude,name:item.name,id: item.id}}" class="sellerBox" v-for="item in sellerList" :key="item.id">
+    <router-link :to="{path: 'Seller', query:{id: item.id}}" class="sellerBox" v-for="item in sellerList" :key="item.id">
       <div class="sellerImg">
         <img :src="imgUrl+item.image_path" slot="icon" width="64" height="64">
       </div>
@@ -77,6 +77,7 @@
         getSellerList(){
           fetch('shopping/restaurants', {latitude:this.latitude,longitude:this.longitude}).then(resp => {
             this.sellerList = resp;
+            console.log(this.sellerList);
           })
         },
         zhunshi(supports){
