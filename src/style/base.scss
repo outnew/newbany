@@ -239,10 +239,43 @@ $flex: $initial-value !default;
   white-space: $isWrap;
 }
 
-
 #app{
   @include width-height($width,$height);
   @include font-face($normal,$normal,$initial-px*1.4,$familay);
   background-color: $bgc-blank;
+}
+
+.border{
+  border: 0.1rem solid #e4e4e4;
+}
+.border-top{
+  border-top: 0.1rem solid #e4e4e4;
+}
+.border-right{
+  border-right: 0.1rem solid #e4e4e4;
+}
+.border-btm{
+  border-bottom: 0.1rem solid #e4e4e4;
+}
+.border-left{
+  border-left: 0.1rem solid #e4e4e4;
+}
+
+.box{
+  display: flex;
+}
+.text-white{
+  color:$base-color*5;
+}
+.bgc-white{
+  background-color:$base-color*5;
+}
+$center:center;
+$around:space-around;
+$between: space-between;
+$column: column;
+
+.bolder{
+  font-weight: 900;
 }
 

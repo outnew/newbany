@@ -34,6 +34,7 @@
       <div class="tabTitle"><span class="goods">商品</span></div>
       <div class="tabTitle"><span class="evaluation">评价</span></div>
     </section>
+
     <article>
       <goods :shopid="id"></goods>
     </article>
@@ -81,41 +82,6 @@
 
 <style lang="scss" scoped>
   @import "src/style/base";
-
-  .border{
-    border: 0.1rem solid #e4e4e4;
-  }
-  .border-top{
-    border-top: 0.1rem solid #e4e4e4;
-  }
-  .border-right{
-    border-right: 0.1rem solid #e4e4e4;
-  }
-  .border-btm{
-     border-bottom: 0.1rem solid #e4e4e4;
-  }
-  .border-left{
-    border-left: 0.1rem solid #e4e4e4;
-  }
-
-  .box{
-    display: flex;
-    flex-wrap: $isWrap;
-  }
-  .text-white{
-    color:$base-color*5;
-  }
-  .bgc-white{
-    background-color:$base-color*5;
-  }
-  $center:center;
-  $around:space-around;
-  $between: space-between;
-  $column: column;
-
-  .bolder{
-    font-weight: 900;
-  }
 
   .shopHead{
     @include width-height($width,$height);
@@ -168,6 +134,7 @@
   .tabBox{
     @include width-height($width,3rem);
     @extend .box;
+    @extend .bgc-white;
     .tabTitle{
       @extend .border-btm;
       flex: 1;
