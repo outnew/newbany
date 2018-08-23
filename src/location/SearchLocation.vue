@@ -1,9 +1,9 @@
 <template>
   <div>
     <header class="slNav">
-      <div class="goBack" v-on:click="goback">&lt;</div>
+      <div class="goBack" v-on:click="goBack">&lt;</div>
       <div class="gCity">{{gCity}}</div>
-      <div class="changeCity" v-on:click="goback">切换城市</div>
+      <div class="changeCity" v-on:click="goBack">切换城市</div>
     </header>
 
     <section class="searchBar">
@@ -44,7 +44,7 @@
         this.show=this.address&&this.address.length>0;
       },
       methods: {
-        goback: function (event) {
+        goBack: function (event) {
           this.$router.back(-1);
         },
         getAddress() {

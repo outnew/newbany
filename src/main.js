@@ -20,7 +20,7 @@ import Discover from './home/Discover';
 import Mine from './home/Mine';
 import SellerList from './home/SellerList';
 import Seller from './home/Seller';
-
+import Goods from './home/Goods';
 
 Vue.use(VueRouter);
 Vue.use(MintUI);
@@ -37,7 +37,8 @@ const routes = [
   { path: '/Discover',name:'Discover', component: Discover},
   { path: '/Mine',name:'Mine', component: Mine},
   { path: '/SellerList',name:'SellerList', component:SellerList},
-  { path: '/Seller',name:'Seller', component:Seller}
+  { path: '/Seller',name:'Seller', component:Seller},
+  { path: '/Goods',name:'Goods', component:Goods}
 ]
 //实例化
 const router = new VueRouter({

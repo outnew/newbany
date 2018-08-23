@@ -14,8 +14,8 @@
 
 <style scoped>
   .next{
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     fill:whitesmoke;
   }
 </style>
