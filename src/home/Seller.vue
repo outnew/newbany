@@ -35,9 +35,9 @@
       <div class="tabTitle"><span class="evaluation">评价</span></div>
     </section>
 
-    <article>
+    <section>
       <goods :shopid="id"></goods>
-    </article>
+    </section>
 
   </div>
 </template>
