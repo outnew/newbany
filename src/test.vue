@@ -1,6 +1,8 @@
 <template>
-  <div class="ul_container">
-    颠三倒四
+  <div>
+    <ul>
+      <li class="box"><span>新品</span></li>
+    </ul>
   </div>
 </template>
 
@@ -25,27 +27,36 @@
 
 <style lang="scss" scoped>
   @import 'src/style/base';
-  .ul_container{
-    @include width-height($width, 35rem);
-    @include font-face($normal,900,$initial-px,$familay);
 
-  }
-  *{
+  *,li{
     margin: 0;
     padding: 0;
-  }
-  li{
     list-style: none;
   }
-  .mcCenter{
+  ul{
     display: flex;
-    justify-content: center;
-    align-items: center;
   }
-  .bAllDef{
-    border: 0.1rem solid black;
+ .box{
+   width: 0px;
+   height: 0px;
+   border: 2rem solid transparent;
+   border-bottom: 2rem solid red;
+   transform: rotate(-45deg) ;
+   //display: flex;
+  // position: relative;
+   //text-align: center;
+   //transform: scale(0.8);
+ }
+  span{
+    white-space: nowrap;
+    font-size: 12px;
+    //justify-content: center;
+    //align-items: center;
+    //transform: rotate(-60deg);
+    transform: rotate(360deg) translate(-1.2rem,1rem);
+   // position: absolute;
+    //bottom: 0;
+    //left: 0;
   }
-  .column{
-    flex-direction: column;
-  }
+
 </style>

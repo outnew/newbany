@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <section class="shopHead">
+  <div v-if="null!=shopInfo">
+
+ <section class="shopHead">
       <header class="headTop">
         <nav class="back" v-on:click="goBack">
           <icon-back></icon-back>
         </nav>
-        <div class="headImg"><img  v-if="shopInfo.image_path" :src="imgUrl+shopInfo.image_path" slot="icon" width="60" height="60"></div>
+        <div class="headImg">
+          <img  v-if="shopInfo.image_path" :src="imgUrl+shopInfo.image_path" slot="icon" width="60" height="60">
+        </div>
         <div class="headTitle">
           <p class="shopName bolder">{{shopInfo.name}}</p>
           <p class="description_text" v-if="shopInfo.piecewise_agent_fee">商家配送／{{shopInfo.float_minimum_order_amount}}分钟送达／{{shopInfo.piecewise_agent_fee.tips}}</p>
@@ -31,13 +34,14 @@
     </section>
 
     <section class="tabBox">
-      <div class="tabTitle"><span class="goods">商品</span></div>
-      <div class="tabTitle"><span class="evaluation">评价</span></div>
+      <p  v-for="tab in tabs" >
+        <span  v-bind:class="['tabTitle',{active: currentTab===tab}]" v-on:click="currentTab=tab">{{tab}}</span>
+      </p>
     </section>
 
-    <section>
+    <!--<section>-->
       <goods :shopid="id"></goods>
-    </section>
+    <!--</section>-->
 
   </div>
 </template>
@@ -51,9 +55,11 @@
       name: "Seller",
       data(){
         return{
-          shopInfo:'',
+          shopInfo:null,
           imgUrl:'http://elm.cangdu.org/img/',
-          id:''
+          id:'',
+          tabs:['商品','评价'],
+          currentTab:'商品'
         }
       },
       beforeMount(){
@@ -132,22 +138,21 @@
   }
 
   .tabBox{
-    @include width-height($width,3rem);
-    @extend .box;
-    @extend .bgc-white;
-    .tabTitle{
-      @extend .border-btm;
+    @include width-height($width,3.5rem);
+    @extend .box,.border-btm,.bgc-white;
+    &>p{
       flex: 1;
       @extend .box;
       justify-content: $center;
       align-items: $center;
-
-      & span{
-        border-bottom: 0.2rem solid red;
-      }
-
     }
-
+  }
+  .tabTitle{
+    color: $base-color*2;
+  }
+  .active{
+    border-bottom: 0.2rem solid $blue;
+    color: $blue;
   }
 
 
