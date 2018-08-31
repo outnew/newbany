@@ -1,27 +1,30 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import './style/base';
-import './style/rem.js';
+import './config/rem.js';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import './componets/iconfont.js';
+import './store/index';
 
 
 import App from './App';
-import Test from './test';
-import Location from './location/Location';
-import SearchLocation from './location/SearchLocation';
-import Home from './Home';
-import Login from './Login';
-import Takeaway from './home/Takeaway';
-import Order from './home/Order';
-import Discover from './home/Discover';
-import Mine from './home/Mine';
-import SellerList from './home/SellerList';
-import Seller from './home/Seller';
-import Goods from './home/Goods';
+import Test from './page/test';
+import Location from './page/location/Location';
+import SearchLocation from './page/location/SearchLocation';
+import Home from './page/Home';
+import Login from './page/Login';
+import Takeaway from './page/home/Takeaway';
+import Order from './page/home/Order';
+import Discover from './page/home/Discover';
+import Mine from './page/home/Mine';
+import SellerList from './page/home/SellerList';
+import Seller from './page/home/Seller';
+import Goods from './page/home/Goods';
+import Shopcart from './page/home/Shopcart';
+
 
 Vue.use(VueRouter);
 Vue.use(MintUI);
@@ -39,14 +42,16 @@ const routes = [
   { path: '/Mine',name:'Mine', component: Mine},
   { path: '/SellerList',name:'SellerList', component:SellerList},
   { path: '/Seller',name:'Seller', component:Seller},
-  { path: '/Goods',name:'Goods', component:Goods}
+  { path: '/Goods',name:'Goods', component:Goods},
+  { path: '/Shopcart',name:'Shopcart', component:Shopcart}
 ]
+
 //实例化
 const router = new VueRouter({
   routes // (缩写) 相当于 routes: routes
 })
 
-/* eslint-disable no-new */
+
 //挂载路由
 new Vue({
   el: '#app',

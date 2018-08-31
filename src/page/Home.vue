@@ -18,23 +18,23 @@
 
     <mt-tabbar name="tabbar" v-model="selected" fixed>
       <mt-tab-item id="takeaway" @click.native.prevent="active = 'takeaway'">
-        <img slot="icon" src="./images/home_btmTab_Takeaway.png" v-show="selected!='takeaway'">
-        <img slot="icon" src="./images/home_btmTab_TakeawaySelected.png" v-show="selected=='takeaway'">
+        <img slot="icon" src="../images/home_btmTab_Takeaway.png" v-show="selected!='takeaway'">
+        <img slot="icon" src="../images/home_btmTab_TakeawaySelected.png" v-show="selected=='takeaway'">
         外卖
       </mt-tab-item>
       <mt-tab-item id="order" @click.native.prevent="active = 'order'">
-        <img slot="icon" src="./images/home_btmTab_Order.png" v-show="selected!='order'">
-        <img slot="icon" src="./images/home_btmTab_OrderSelected.png" v-show="selected=='order'">
+        <img slot="icon" src="../images/home_btmTab_Order.png" v-show="selected!='order'">
+        <img slot="icon" src="../images/home_btmTab_OrderSelected.png" v-show="selected=='order'">
         订单
       </mt-tab-item>
       <mt-tab-item id="discover"  @click.native.prevent="active = 'discover'">
-        <img slot="icon" src="./images/home_btmTab_Discover.png" v-show="selected!='discover'">
-        <img slot="icon" src="./images/home_btmTab_DiscoverSelected.png" v-show="selected=='discover'">
+        <img slot="icon" src="../images/home_btmTab_Discover.png" v-show="selected!='discover'">
+        <img slot="icon" src="../images/home_btmTab_DiscoverSelected.png" v-show="selected=='discover'">
         发现
       </mt-tab-item>
       <mt-tab-item id="mine"  @click.native.prevent="active = 'mine'">
-        <img slot="icon" src="./images/home_btmTab_Mine.png" v-show="selected!='mine'">
-        <img slot="icon" src="./images/home_btmTab_MineSelected.png" v-show="selected=='mine'">
+        <img slot="icon" src="../images/home_btmTab_Mine.png" v-show="selected!='mine'">
+        <img slot="icon" src="../images/home_btmTab_MineSelected.png" v-show="selected=='mine'">
         我的
       </mt-tab-item>
     </mt-tabbar>

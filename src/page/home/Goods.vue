@@ -39,11 +39,12 @@
                   <span>¥{{item.specfoods[0].price}}</span>
                   <span v-if="item.specifications.length">起</span>
                 </section>
-                <section>
-                  <icon-subtract></icon-subtract>
-
-                  <icon-add></icon-add>
-                </section>
+                <!--<section class="shopcart">-->
+                  <!--<icon-base icon-style="subtract" icon-class="subtract" @click="increment"></icon-base>-->
+                  <!--<p>{{count}}</p>-->
+                  <!--<icon-base icon-style="subtract" icon-class="jiahao-24" @click="decrement"></icon-base>-->
+                <!--</section>-->
+                <shopcart :shopid="id"></shopcart>
               </footer>
             </section>
 
@@ -58,17 +59,19 @@
 </template>
 
 <script>
-  import  fetch  from '../fetch';
-  import IconGengduo from "../componets/IconGengduo";
-  import IconAdd from "../componets/IconAdd";
-  import IconSubtract from "../componets/IconSubtract";
+  import  fetch  from '../../config/fetch/index';
+  import IconGengduo from "../../componets/IconGengduo";
+  import IconBase from "../../componets/IconBase";
+  import Shopcart from "./Shopcart";
+
     export default {
       name: "Goods",
       data() {
         return {
           menuList:[],
           currentTab:'',
-          imgUrl:'//elm.cangdu.org/img/'
+          imgUrl:'//elm.cangdu.org/img/',
+          //count: 0
         };
       },
       props: {
@@ -76,6 +79,11 @@
       },
       beforeMount(){
         this.getMenu();
+      },
+      computed: {
+        // count () {
+        //   return store.state.count;
+        // }
       },
       methods:{
         getMenu(){
@@ -85,12 +93,20 @@
             this.currentTab = this.menuList[0].name;
             console.log(this.menuList);
           })
-        }
+        },
+        // increment () {
+        //   store.commit('increment')
+        // },
+        // decrement () {
+        //   store.commit('decrement')
+        // }
       },
       components: {
         IconGengduo:IconGengduo,
-        IconAdd:IconAdd,
-        IconSubtract:IconSubtract
+        //IconAdd:IconAdd,
+        //IconSubtract:IconSubtract,
+        IconBase:IconBase,
+        Shopcart:Shopcart
       }
     }
 </script>
@@ -237,6 +253,9 @@
         color: #f60;
         font-weight: 700;
         margin-right: .3rem;
+      }
+      .shopcart{
+        @extend .box;
       }
     }
 

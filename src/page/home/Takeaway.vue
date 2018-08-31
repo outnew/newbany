@@ -20,7 +20,7 @@
 
     <section>
       <mt-cell title="附近商家" style="margin-top: 1rem;">
-        <img slot="icon" src="../images/home_t_store.png" width="24" height="24">
+        <img slot="icon" src="../../images/home_t_store.png" width="24" height="24">
       </mt-cell>
       <seller-list style="margin-bottom: 7rem"></seller-list>
     </section>
@@ -30,7 +30,7 @@
 
 <script>
   import SellerList from './SellerList';
-  import  fetch  from '../fetch'
+  import  fetch  from '../../config/fetch/index'
   export default {
     name: "Takeaway",
     data() {

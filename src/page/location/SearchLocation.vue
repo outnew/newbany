@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import  fetch  from '../fetch'
+  import  fetch  from '../../config/fetch/index'
     export default {
       name: "SearchLocation",
       data() {

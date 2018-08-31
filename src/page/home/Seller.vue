@@ -47,9 +47,9 @@
 </template>
 
 <script>
-  import  fetch  from '../fetch'
-  import IconBack from "../componets/IconBack";
-  import IconNext from "../componets/IconNext";
+  import  fetch  from '../../config/fetch/index'
+  import IconBack from "../../componets/IconBack";
+  import IconNext from "../../componets/IconNext";
   import Goods from "./Goods";
     export default {
       name: "Seller",

@@ -11,11 +11,13 @@
             <span v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</span>
           </div>
         </section>
+
         <section class="info mSBcC bb_def" style="height: 2rem">
           <div class="grade">
             <span style="flex: 1">
-            <icon-star :rating="item.rating"></icon-star>
-              </span>
+              <icon-star :rating="item.rating"></icon-star>
+            </span>
+
             <span style="color: #ff6000;">{{item.rating}}</span>
             <span class="saleNum" :class="item.rating_count? 'saleNum': ''">{{item.rating_count}}</span>
           </div>
@@ -31,6 +33,7 @@
             <span class="segmentation">/</span>
             {{item.piecewise_agent_fee.tips}}
           </p>
+
           <p class="distance_time">
 							<span v-if="Number(item.distance)">
                 {{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
@@ -49,9 +52,9 @@
 </template>
 
 <script>
-    import IconBase from "../componets/IconBase";
-    import IconStar from "../componets/IconStar";
-    import  fetch  from '../fetch'
+    import IconBase from "../../componets/IconBase";
+    import IconStar from "../../componets/IconStar";
+    import  fetch  from '../../config/fetch/index'
 
     export default {
       name: "SellerList",
@@ -67,7 +70,7 @@
             imgUrl:'http://elm.cangdu.org/img/'
           }
       },
-      mounted(){
+     created(){
         this.latitude=this.$route.query.latitude;
         this.longitude=this.$route.query.longitude;
         this.getSellerList();
