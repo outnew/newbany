@@ -74,7 +74,7 @@
 
       }
     },
-      computed: {
+    computed: {
         // 对数组进行排序  依次A-Z
         sortGroup() {
           let sortobj = {};
@@ -88,8 +88,8 @@
           }
           return sortobj;//返回sort 在v-for中使用
         }
-      }
     }
+  }
 
 
 </script>

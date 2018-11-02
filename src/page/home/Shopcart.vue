@@ -1,7 +1,7 @@
 <template>
   <section class="shopcart">
     <icon-base icon-style="subtract" icon-class="subtract" ></icon-base>
-    <p>{{count}}</p>
+    <!--<p>{{count}}</p>-->
     <icon-base icon-style="add" icon-class="jiahao-24" ></icon-base>
   </section>
 </template>
@@ -19,15 +19,14 @@
           //count:[]
         }
       },
-      props: ['shopid'],
+      // props: ['shopid'],
       created(){
         // this.shopid=this.$route.query.id;
       },
       computed: {
-
-        count () {
-          return store.state.count;
-        }
+        // count () {
+        //   return store.state.count;
+        // }
       },
       methods:{
         // increment () {

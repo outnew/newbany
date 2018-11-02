@@ -1,18 +1,23 @@
 <template>
   <div style="position: relative">
     <mt-tab-container v-model="active">
+
       <mt-tab-container-item id="takeaway"  style="display: flex;">
         <v-takeaway style="width: 100%"></v-takeaway>
       </mt-tab-container-item>
+
       <mt-tab-container-item id="order">
-        order
+        order页面
       </mt-tab-container-item>
+
       <mt-tab-container-item id="discover">
-        discover
+        discover页面
       </mt-tab-container-item>
+
       <mt-tab-container-item id="mine">
-       mine
+        mine页面
       </mt-tab-container-item>
+
     </mt-tab-container>
 
 
@@ -49,7 +54,7 @@
     data() {
       return {
         selected: 'takeaway',
-        active:'takeaway',
+        active: 'takeaway',
         img:[''],
       };
     },

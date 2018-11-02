@@ -39,9 +39,14 @@
       </p>
     </section>
 
-    <!--<section>-->
-      <goods :shopid="id"></goods>
-    <!--</section>-->
+    <goods :shopid="id"></goods>
+
+    <footer class="shopcartFooter">
+      <p>
+
+      </p>
+      <p>去结算</p>
+    </footer>
 
   </div>
 </template>

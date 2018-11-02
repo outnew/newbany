@@ -1,62 +1,63 @@
 <template>
   <div>
-    <ul>
-      <li class="box"><span>新品</span></li>
-    </ul>
+    <input type="text" v-model="value">
+    <h4>{{value}}</h4>
+    <h4>{{text}}</h4>
+    <button v-on:click="changeText">changeText</button>
   </div>
 </template>
 
 <script>
-  import {Swipe,SwipeItem} from 'mint-ui';
+
     export default {
       name: "test",
       data(){
         return{
-
+            text:"Vue双向绑定",
+            value:"Hello，妥妥"
         }
       },
-      components: {
-        mtSwipe:Swipe,
-        mtSwipeItem:SwipeItem
+      methods:{
+        changeText:function () {
+          this.text="Baby，Mami love you"
+        }
+      },
+      mounted:function ()  {
+        window.setTimeout(()=>{
+          this.text='稳稳，你好帅'
+        },1000)
       }
 
 
     }
 
+    // $(document).ready(function () {
+    //   $("li").css({"width":"100px","height":"50px","color":"white"});
+    //   $("li:even").css("background-color","red");
+    //   $("li:odd").css("background-color","pink");
+    // })
+
+
 </script>
 
-<style lang="scss" scoped>
-  @import 'src/style/base';
+<style>
+  /*@import 'src/style/base';*/
 
   *,li{
     margin: 0;
     padding: 0;
     list-style: none;
   }
-  ul{
-    display: flex;
+
+  h4{
+    width: 20rem;
+    height: 2rem;
   }
- .box{
-   width: 0px;
-   height: 0px;
-   border: 2rem solid transparent;
-   border-bottom: 2rem solid red;
-   transform: rotate(-45deg) ;
-   //display: flex;
-  // position: relative;
-   //text-align: center;
-   //transform: scale(0.8);
- }
-  span{
-    white-space: nowrap;
-    font-size: 12px;
-    //justify-content: center;
-    //align-items: center;
-    //transform: rotate(-60deg);
-    transform: rotate(360deg) translate(-1.2rem,1rem);
-   // position: absolute;
-    //bottom: 0;
-    //left: 0;
+  input,button{
+    width: 20rem;
+    height: 2rem;
+    border: 1px solid black;
   }
+
 
 </style>

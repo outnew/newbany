@@ -7,7 +7,12 @@ import VueRouter from 'vue-router';
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 import './componets/iconfont.js';
-import './store/index';
+import store from './store/index';
+import 'jquery';
+
+Vue.use(VueRouter);
+
+Vue.use(MintUI);
 
 
 import App from './App';
@@ -26,8 +31,6 @@ import Goods from './page/home/Goods';
 import Shopcart from './page/home/Shopcart';
 
 
-Vue.use(VueRouter);
-Vue.use(MintUI);
 
 //配置路由
 const routes = [
@@ -56,5 +59,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: { App }
 })

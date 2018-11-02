@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
@@ -30,6 +32,14 @@ module.exports = {
             'components': path.resolve(__dirname, '../src/components')
         }
     },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        jquery: "jquery",
+        "window.jQuery": "jquery"
+      })
+    ],
     resolveLoader: {
         fallback: [path.join(__dirname, '../node_modules')]
     },

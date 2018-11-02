@@ -39,12 +39,13 @@
                   <span>¥{{item.specfoods[0].price}}</span>
                   <span v-if="item.specifications.length">起</span>
                 </section>
+
                 <!--<section class="shopcart">-->
                   <!--<icon-base icon-style="subtract" icon-class="subtract" @click="increment"></icon-base>-->
                   <!--<p>{{count}}</p>-->
                   <!--<icon-base icon-style="subtract" icon-class="jiahao-24" @click="decrement"></icon-base>-->
                 <!--</section>-->
-                <shopcart :shopid="id"></shopcart>
+                <shopcart></shopcart>
               </footer>
             </section>
 
